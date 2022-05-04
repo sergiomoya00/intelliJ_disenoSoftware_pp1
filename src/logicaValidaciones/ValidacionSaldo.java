@@ -8,7 +8,7 @@ public class ValidacionSaldo {
     public void validacionSaldo(){};
 
     /**
-     * Metodo para validar si un texto es numerico
+     * Metodo para validar si el monto de la operacion es menor o igual al saldo disponible
      *
      * @param pSaldo int que representa el saldo de la cuenta
      * @param pMonto int que representa el número por validar

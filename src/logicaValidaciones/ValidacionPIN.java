@@ -9,7 +9,7 @@ public class ValidacionPIN {
     public void validacionPIN(){};
 
     /**
-     * Metodo para validar si un texto es numerico
+     * Metodo para validar si un la contraseña cumple con la longitud solicitada
      *
      * @param pPIN String que representa el texto por validar
      * @return boolean true la lingitud del PIN es la esperada
@@ -19,16 +19,15 @@ public class ValidacionPIN {
         return pPIN.length() >= minimo;
     }
     /**
-     * Metodo para validar si un texto es numerico
+     * Metodo para validar si el PIN cumple con los requerimientos solicitados
      *
      * @param pPIN String que representa el texto por validar
      * @return boolean true si el PIN contiene los elementos esperados
      */
     public boolean validarPIN(String pPIN){
-        if (validarLongitud(pPIN)){ //dflsdkjfhsldkfhlskdhf
-            return pPIN.matches("a-zA-Z0-9");
+        if (validarLongitud(pPIN)){
+            return pPIN.matches("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=S+$).{8,}$");
         }
-
         return false;
     }
 }
