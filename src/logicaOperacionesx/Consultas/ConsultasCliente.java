@@ -1,14 +1,15 @@
-package dao;
+package logicaOperacionesx.Consultas;
+import dao.conexionSQL;
 import logicaNegocios.Persona;
 import logicaNegocios.Cliente;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.sql.ResultSet;
 
-public class ConsultaInsertarCliente {
+public class ConsultasCliente {
 
     public boolean insertarCliente(Cliente cliente) {
         PreparedStatement ps;
@@ -16,7 +17,7 @@ public class ConsultaInsertarCliente {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String formattedDate = simpleDateFormat.format(Persona.getFechaNacimiento());
         java.sql.Date fechaNacimiento = java.sql.Date.valueOf(formattedDate);
-        String datoCliente = "";
+        String datoCliente = "insert into persona values ?,?,?,?,?,?,?";
         try {
             ps = con.prepareStatement(datoCliente);
             ps.setString(1,Persona.getSegundoApellido());
@@ -39,5 +40,21 @@ public class ConsultaInsertarCliente {
                 System.err.println(e);
             }
         }
+    }
+
+    public ArrayList buscarClientes (String pPrimerApellido){
+        ArrayList ClienteApellido = new ArrayList();
+        try{
+            Connection con = conexionSQL.conectar();
+            PreparedStatement ps = con.prepareStatement("select * from persona where persona.primer_apellido = ?");
+            ps.setString(1,pPrimerApellido);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                ClienteApellido.add(rs.getString(1));
+            }
+        }catch(SQLException e){
+            System.err.println(e);
+        }
+        return ClienteApellido;
     }
 }
