@@ -25,7 +25,7 @@ public class ValidacionPIN {
      * @return boolean true si el PIN contiene los elementos esperados
      */
     public boolean validarPIN(String pPIN){
-        if (validarLongitud(pPIN)){
+        if (validarLongitud(pPIN)){ //dflsdkjfhsldkfhlskdhf
             return pPIN.matches("a-zA-Z0-9");
         }
 
