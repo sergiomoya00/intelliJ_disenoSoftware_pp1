@@ -12,7 +12,7 @@ public class conexionSQL {
         Connection con = null;
         String password = "felipe123"; //contraseña
         String usuario = "Felipe";  //nombre de usuario
-        String url = "jdbc:sqlserver://DESKTOP-J8562BL;databaseName=Sistema_Bancario;user=" + usuario + ";password=" + password;
+        String url = "jdbc:sqlserver://localhost:1433;database=Sistema_Bancario";
         try {
             con = DriverManager.getConnection(url);
             if (con != null) {

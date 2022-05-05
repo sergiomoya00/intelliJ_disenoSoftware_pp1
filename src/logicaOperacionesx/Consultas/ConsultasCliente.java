@@ -1,7 +1,7 @@
 package logicaOperacionesx.Consultas;
 import dao.conexionSQL;
-import logicaNegocios.Persona;
 import logicaNegocios.Cliente;
+import javax.swing.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.text.SimpleDateFormat;
@@ -11,22 +11,22 @@ import java.sql.ResultSet;
 
 public class ConsultasCliente {
 
-    public boolean insertarCliente(Cliente cliente) {
+   public boolean insertarCliente(Cliente cliente) {
         PreparedStatement ps;
         Connection con = conexionSQL.conectar();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String formattedDate = simpleDateFormat.format(Persona.getFechaNacimiento());
+        String formattedDate = simpleDateFormat.format(Cliente.getFechaNacimiento());
         java.sql.Date fechaNacimiento = java.sql.Date.valueOf(formattedDate);
         String datoCliente = "insert into persona values ?,?,?,?,?,?,?";
         try {
             ps = con.prepareStatement(datoCliente);
-            ps.setString(1,Persona.getSegundoApellido());
-            ps.setString(2,Persona.getPrimerApellido());
-            ps.setString(3,Persona.getNombre());
-            ps.setInt(4,Persona.getCedula());
+            ps.setString(1,Cliente.getSegundoApellido());
+            ps.setString(2,Cliente.getPrimerApellido());
+            ps.setString(3,Cliente.getNombre());
+            ps.setInt(4,Cliente.getCedula());
             ps.setDate(5,fechaNacimiento);
-            ps.setInt(6,Persona.getTelefono());
-            ps.setString(7,Persona.getCorreoElectronico());
+            ps.setInt(6,Cliente.getTelefono());
+            ps.setString(7,Cliente.getCorreoElectronico());
             return true;
 
         } catch (SQLException e) {
@@ -40,6 +40,24 @@ public class ConsultasCliente {
                 System.err.println(e);
             }
         }
+    }
+
+    public DefaultComboBoxModel ListarClientes(){
+        DefaultComboBoxModel ListaClientes = new DefaultComboBoxModel();
+        try{
+            Connection con = conexionSQL.conectar();
+            PreparedStatement ps = con.prepareStatement("select * from persona");
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                ListaClientes.addElement(rs.getString(1));
+            }
+            con.close();
+            rs.close();
+        }
+        catch(SQLException e){
+            System.err.println(e);
+        }
+        return ListaClientes;
     }
 
     public ArrayList buscarClientes (String pPrimerApellido){

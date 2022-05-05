@@ -10,7 +10,7 @@ public class Cliente extends Persona {
         super(primerApellido,SegundoApellido,nombre,cedula,fechaNacimiento,telefono,correoElectronico);
         codigo="";
     }
-    public void setCodigo(String pCodigo){pCodigo=codigo;}
+    public void setCodigo(String pCodigo){this.codigo = pCodigo;}
 
     public String getCodigo(){return codigo;}
 }
