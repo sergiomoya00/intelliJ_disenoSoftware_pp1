@@ -3,7 +3,6 @@ package logicaOperacionesx.Consultas;
 import dao.conexionSQL;
 import logicaNegocios.Cuenta;
 
-import javax.lang.model.type.ArrayType;
 import javax.swing.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,7 +17,7 @@ public class ConsultasCuentas {
         PreparedStatement ps;
         Connection con = conexionSQL.conectar();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String formattedDate = simpleDateFormat.format(Cuenta.getFechaCreacion());
+        String formattedDate = simpleDateFormat.format(cuenta.getFechaCreacion());
         java.sql.Date fechaCreacion = java.sql.Date.valueOf(formattedDate);
         String crearCuenta ="";
         try{

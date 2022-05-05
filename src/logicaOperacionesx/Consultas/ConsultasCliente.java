@@ -15,18 +15,18 @@ public class ConsultasCliente {
         PreparedStatement ps;
         Connection con = conexionSQL.conectar();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String formattedDate = simpleDateFormat.format(Cliente.getFechaNacimiento());
+        String formattedDate = simpleDateFormat.format(cliente.getFechaNacimiento());
         java.sql.Date fechaNacimiento = java.sql.Date.valueOf(formattedDate);
         String datoCliente = "insert into persona values ?,?,?,?,?,?,?";
         try {
             ps = con.prepareStatement(datoCliente);
-            ps.setString(1,Cliente.getSegundoApellido());
-            ps.setString(2,Cliente.getPrimerApellido());
-            ps.setString(3,Cliente.getNombre());
-            ps.setInt(4,Cliente.getCedula());
+            ps.setString(1,cliente.getSegundoApellido());
+            ps.setString(2,cliente.getPrimerApellido());
+            ps.setString(3,cliente.getNombre());
+            ps.setInt(4,cliente.getCedula());
             ps.setDate(5,fechaNacimiento);
-            ps.setInt(6,Cliente.getTelefono());
-            ps.setString(7,Cliente.getCorreoElectronico());
+            ps.setInt(6,cliente.getTelefono());
+            ps.setString(7,cliente.getCorreoElectronico());
             return true;
 
         } catch (SQLException e) {
