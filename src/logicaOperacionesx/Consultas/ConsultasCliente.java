@@ -2,12 +2,10 @@ package logicaOperacionesx.Consultas;
 import dao.conexionSQL;
 import logicaNegocios.Cliente;
 import javax.swing.*;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
+import javax.swing.table.DefaultTableModel;
+import java.sql.*;
 import java.text.SimpleDateFormat;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.sql.ResultSet;
 
 public class ConsultasCliente {
 
@@ -42,20 +40,26 @@ public class ConsultasCliente {
         }
     }
 
-    public DefaultComboBoxModel ListarClientes(){
-        DefaultComboBoxModel ListaClientes = new DefaultComboBoxModel();
+    public DefaultTableModel ListarClientes(){
+        DefaultTableModel ListaClientes = new DefaultTableModel();
         try{
             Connection con = conexionSQL.conectar();
             PreparedStatement ps = con.prepareStatement("select * from persona");
             ResultSet rs = ps.executeQuery();
+            ResultSetMetaData rsMd = rs.getMetaData();
+            int cantidadColumnas = rsMd.getColumnCount();
             while(rs.next()){
-                ListaClientes.addElement(rs.getString(1));
+                Object[] filas = new Object[cantidadColumnas];
+                for(int i = 0; i<cantidadColumnas; i++){
+                    filas[i] = rs.getObject(i+1);
+                }
+                ListaClientes.addRow(filas);
             }
             con.close();
             rs.close();
         }
         catch(SQLException e){
-            System.err.println(e);
+            System.err.println(e.toString());
         }
         return ListaClientes;
     }

@@ -1,4 +1,4 @@
-package logicaNegocios;
+package logicaOperaciones;
 
 public class Comision {
     private String tipoOperacion;

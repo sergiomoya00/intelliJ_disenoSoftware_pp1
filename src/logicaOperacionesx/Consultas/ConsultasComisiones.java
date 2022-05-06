@@ -1,13 +1,10 @@
 package logicaOperacionesx.Consultas;
 
 import dao.conexionSQL;
-import logicaNegocios.Cliente;
-import logicaNegocios.Comision;
+import logicaOperaciones.Comision;
 
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
-import java.text.SimpleDateFormat;
-
 public class ConsultasComisiones {
 
     public boolean IngresarComision(Comision comision){
@@ -29,10 +26,10 @@ public class ConsultasComisiones {
             } catch (SQLException e){System.err.println(e);}
         }
     }
-    public DefaultTableModel comisioneTotales (){
+    public DefaultTableModel comisionesTotales () throws SQLException {
         DefaultTableModel Comisiones = new DefaultTableModel();
         Connection con = conexionSQL.conectar();
-        PreparedStatement ps = con.prepareStatement("");
+        PreparedStatement ps = con.prepareStatement("select sum (monto) from comisiones");
         try{
             ResultSet rs = ps.executeQuery();
             ResultSetMetaData rsMd = rs.getMetaData();
@@ -48,10 +45,10 @@ public class ConsultasComisiones {
         return Comisiones;
     }
 
-    public DefaultTableModel comisionesPorCuenta(int id){
+    public DefaultTableModel comisionesPorCuenta(int id) throws SQLException {
         DefaultTableModel ComisionCuenta = new DefaultTableModel();
         Connection con = conexionSQL.conectar();
-        PreparedStatement ps = con.prepareStatement("");
+        PreparedStatement ps = con.prepareStatement("select sum (monto) from comisiones where cuenta_cargada = ?");
         try{
             ps.setInt(1,id);
             ResultSet rs = ps.executeQuery();

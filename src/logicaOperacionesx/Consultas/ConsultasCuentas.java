@@ -4,10 +4,8 @@ import dao.conexionSQL;
 import logicaNegocios.Cuenta;
 
 import javax.swing.*;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import javax.swing.table.DefaultTableModel;
+import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
@@ -38,14 +36,26 @@ public class ConsultasCuentas {
             }catch(SQLException e){System.err.println(e);}
         }
     }
-    public DefaultComboBoxModel listaCuentas(){
-        DefaultComboBoxModel listaCuenta = new DefaultComboBoxModel();
+    public DefaultTableModel listaCuentas(){
+        DefaultTableModel listaCuenta = new DefaultTableModel();
         try{
             Connection con = conexionSQL.conectar();
             PreparedStatement ps = con.prepareStatement("select * from cuenta");
             ResultSet rs = ps.executeQuery();
+            ResultSetMetaData rsMd = rs.getMetaData();
+            int cantidadColumnas = rsMd.getColumnCount();
+            listaCuenta.addColumn("ID");
+            listaCuenta.addColumn("Dueño");
+            listaCuenta.addColumn("Fecha de Creacion");
+            listaCuenta.addColumn("Saldo");
+            listaCuenta.addColumn("Estatus de la cuenta");
+            listaCuenta.addColumn("Operaciones Realizadas");
             while(rs.next()){
-                listaCuenta.addElement(rs.getString(1));
+                Object[] filas = new Object[cantidadColumnas];
+                for(int i = 0; i<cantidadColumnas; i++){
+                    filas[i] = rs.getObject(i+1);
+                }
+                listaCuenta.addRow(filas);
             }
             con.close();
             rs.close();
