@@ -5,6 +5,12 @@ import javax.mail.internet.InternetAddress;
 
 public class ValidacionEmail {
 
+    /**
+     * Metodo para validar si el formato del email es correcto.
+     *
+     * @param email String que representa el email por validar.
+     * @return boolean true si el formato del email es valido.
+     */
     public static boolean isValidEmailAddress(String email) {
         boolean result = true;
         try {
