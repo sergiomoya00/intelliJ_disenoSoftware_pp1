@@ -11,10 +11,6 @@ public class MenuOpciones {
     public JButton btnTransferencia;
     public JButton btnRetiro;
     public JButton btnDeposito;
-    public JButton btnUsuarios;
-    public JButton btnCuentas;
-    public JButton btnSaldo;
-    public JButton btnConsultaEstado;
     public JButton btnEstatus;
-    public JButton btnComisiones;
+    public JButton btnConsultas;
 }

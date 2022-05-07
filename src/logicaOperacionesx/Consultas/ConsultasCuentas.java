@@ -128,4 +128,33 @@ public class ConsultasCuentas {
         return estatusCuenta;
     }
 
+    public DefaultTableModel CargarCuentas(){
+        DefaultTableModel cuentas = new DefaultTableModel();
+        try {
+            Connection con = conexionSQL.conectar();
+            PreparedStatement ps = con.prepareStatement("select * from cuenta");
+            ResultSet rs = ps.executeQuery();
+            ResultSetMetaData rsMd = rs.getMetaData();
+            int cantidadColumnas = rsMd.getColumnCount();
+            cuentas.addColumn("Primer Apellido");
+            cuentas.addColumn("Segundo Apellido");
+            cuentas.addColumn("Nombre Completo");
+            cuentas.addColumn("Cedula");
+            cuentas.addColumn("Fecha de Nacimiento");
+            cuentas.addColumn("Telefono");
+            cuentas.addColumn("Correo Electrónico");
+            while(rs.next()){
+                Object[] filas = new Object[cantidadColumnas];
+                for(int i = 0; i<cantidadColumnas; i++){
+                    filas[i] = rs.getObject(i+1);
+                }
+                cuentas.addRow(filas);
+            }
+
+        }catch(SQLException e){System.err.println(e);}
+        return cuentas;
+        }
+
+    }
+
 }
