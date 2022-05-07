@@ -3,7 +3,6 @@ package logicaOperacionesx.Consultas;
 import dao.conexionSQL;
 import logicaNegocios.Cuenta;
 
-import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
 import java.text.SimpleDateFormat;
