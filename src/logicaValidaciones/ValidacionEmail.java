@@ -11,7 +11,7 @@ public class ValidacionEmail {
      * @param email String que representa el email por validar.
      * @return boolean true si el formato del email es valido.
      */
-    public static boolean isValidEmailAddress(String email) {
+    public static boolean validarDireccionEmail(String email) {
         boolean result = true;
         try {
             InternetAddress emailAddr = new InternetAddress(email);
@@ -23,6 +23,6 @@ public class ValidacionEmail {
     }
 
     public static void main(String[] args) {
-        isValidEmailAddress("s.a.moyas.00@hotmail.com");
+        validarDireccionEmail("s.a.moyas.00@hotmail.com");
     }
 }
