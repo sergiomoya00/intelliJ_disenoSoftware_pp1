@@ -3,8 +3,8 @@ package GUICliente;
 import javax.swing.*;
 
 public class CambiarPIN {
-    private JTextField txtCuenta;
-    private JTextField yxyPINViejo;
-    private JTextField txtPINNuevo;
-    private JButton btnRegresar;
+    public JTextField txtCuenta;
+    public JTextField yxyPINViejo;
+    public JTextField txtPINNuevo;
+    public JButton btnRegresar;
 }

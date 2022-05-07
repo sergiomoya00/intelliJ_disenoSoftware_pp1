@@ -3,6 +3,6 @@ package GUICliente;
 import javax.swing.*;
 
 public class MenuPrincipal {
-    private JButton btnMenu;
-    private JButton btnRegistrarse;
+    public JButton btnMenu;
+    public JButton btnRegistrarse;
 }
